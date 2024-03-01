@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dm5te3i0gg2l3"]
+
+[ext_resource type="Script" path="res://enemy/enemy_base.gd" id="1_o8la1"]
+[ext_resource type="Texture2D" uid="uid://cheui1i3qalbe" path="res://icon.svg" id="1_qgtue"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ecc5l"]
+size = Vector2(127, 128)
+
+[sub_resource type="SystemFont" id="SystemFont_6hnm6"]
+font_names = PackedStringArray("Segoe UI")
+subpixel_positioning = 0
+
+[node name="EnemyBase" type="CharacterBody2D"]
+script = ExtResource("1_o8la1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qgtue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -2)
+shape = SubResource("RectangleShape2D_ecc5l")
+
+[node name="prompt" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(150, 250)
+offset_left = -76.0
+offset_top = 70.0
+offset_right = 74.0
+offset_bottom = 120.0
+theme_override_fonts/normal_font = SubResource("SystemFont_6hnm6")
+theme_override_font_sizes/normal_font_size = 22
+bbcode_enabled = true
+text = "[center]type this thang?"
+scroll_active = false
+tab_size = 3
+metadata/_edit_use_anchors_ = true

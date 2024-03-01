@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt7nflcejhhkc"]
+
+[ext_resource type="Script" path="res://main/main.gd" id="1_h8aja"]
+[ext_resource type="PackedScene" uid="uid://cpqk5m62jc80x" path="res://enemy/enemy_container.tscn" id="2_0h28o"]
+[ext_resource type="PackedScene" uid="uid://dm5te3i0gg2l3" path="res://enemy/enemy_base.tscn" id="2_goikc"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_h8aja")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -12.0
+offset_top = -10.0
+offset_right = 1171.0
+offset_bottom = 661.0
+color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="SpawnContainer" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(933, -84)
+
+[node name="Marker2D2" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(681, -97)
+
+[node name="Marker2D3" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(410, -89)
+
+[node name="Marker2D4" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(121, -86)
+
+[node name="Marker2D5" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(251, -86)
+
+[node name="Marker2D6" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(546, -106)
+
+[node name="Marker2D7" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(802, -104)
+
+[node name="Marker2D8" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(1057, -91)
+
+[node name="EnemyContainer" parent="." instance=ExtResource("2_0h28o")]
+
+[node name="EnemyBase" parent="EnemyContainer" instance=ExtResource("2_goikc")]
+position = Vector2(715, 222)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
