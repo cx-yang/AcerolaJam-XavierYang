@@ -31,6 +31,8 @@ var happy_words = [
 
 var special_characters = [
 	"",
+	"",
+	"",
 	"!",
 	"?"
 ]

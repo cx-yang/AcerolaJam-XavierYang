@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://bns64xsow8lv7"]
+
+[ext_resource type="Script" path="res://ui/menu_ui.gd" id="1_ibrtd"]
+
+[node name="MenuUI" type="CanvasLayer"]
+script = ExtResource("1_ibrtd")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HB" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="DifficulttyLabel" type="Label" parent="VBoxContainer/HB"]
+layout_mode = 2
+text = "Difficulty: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="VBoxContainer/HB"]
+layout_mode = 2
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GOMC" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="GameOverScreen" type="PanelContainer" parent="GOMC"]
+layout_mode = 2
+
+[node name="CC" type="CenterContainer" parent="GOMC/GameOverScreen"]
+layout_mode = 2
+
+[node name="VB" type="VBoxContainer" parent="GOMC/GameOverScreen/CC"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="LoseLabel" type="Label" parent="GOMC/GameOverScreen/CC/VB"]
+layout_mode = 2
+text = "You lose"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="GOMC/GameOverScreen/CC/VB"]
+layout_mode = 2
+text = "Restart"
+flat = true
+
+[connection signal="pressed" from="GOMC/GameOverScreen/CC/VB/RestartButton" to="." method="_on_restart_button_pressed"]

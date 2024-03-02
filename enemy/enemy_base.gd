@@ -12,6 +12,8 @@ extends CharacterBody2D
 func _ready():
 	prompt_text = PromptList.get_prompt()
 	prompt.parse_bbcode(set_center_tags(prompt_text))
+	
+	SignalManager.difficulty_increased.connect(handle_difficulty_increase)
 
 func _physics_process(delta: float) -> void:
 	global_position.y += speed
@@ -38,3 +40,13 @@ func get_bbcode_end_color_tag() -> String:
 
 func set_center_tags(string_to_center: String) -> String:
 	return "[center]%s" %string_to_center
+
+func set_difficulty(difficulty: int) -> void:
+	handle_difficulty_increase(difficulty)
+
+func handle_difficulty_increase(difficulty: int) -> void:
+	var new_speed = speed + (0.125 * difficulty)
+	speed = clamp(new_speed, speed, 3)
+	
+	
+

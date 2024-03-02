@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cheui1i3qalbe" path="res://icon.svg" id="1_qgtue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ecc5l"]
-size = Vector2(127, 128)
+size = Vector2(111, 105)
 
 [sub_resource type="SystemFont" id="SystemFont_6hnm6"]
 font_names = PackedStringArray("Segoe UI")
@@ -17,7 +17,7 @@ script = ExtResource("1_o8la1")
 texture = ExtResource("1_qgtue")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -2)
+position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_ecc5l")
 
 [node name="prompt" type="RichTextLabel" parent="."]

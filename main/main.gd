@@ -4,19 +4,23 @@ extends Node2D
 @onready var enemy_base = $EnemyBase
 @onready var spawn_container = $SpawnContainer
 @onready var spawn_timer = $SpawnTimer
+@onready var difficulty_timer = $DifficultyTimer
+
+@onready var game_over_screen = $MenuUI/GOMC
 
 var active_enemy: CharacterBody2D = null
 var current_letter_index: int = -1
 var last_spawn_number: int = 0
 
+var difficulty: int = 0
+var score: int = 0
+
 var enemy = preload("res://enemy/enemy_base.tscn")
 
 func _ready() -> void:
-	randomize()
-	spawn_enemy()
+	SignalManager.start_game.connect(start_game)
+	start_game()
 	
-	spawn_timer.start()
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and not event.is_pressed():
@@ -37,6 +41,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				active_enemy.set_next_character(current_letter_index)
 				if current_letter_index == prompt.length():
 					print("done")
+					score = prompt.length() * 120
+					SignalManager.current_score.emit(score)
 					current_letter_index = -1
 					active_enemy.queue_free()
 					active_enemy = null
@@ -62,10 +68,36 @@ func _on_spawn_timer_timeout():
 func spawn_enemy() -> void:
 	var enemy_instance = enemy.instantiate()
 	var spawns = spawn_container.get_children()
-	
 	var index = randi() % spawns.size()
-	last_spawn_number = index
 	
-	enemy_container.add_child(enemy_instance)
 	enemy_instance.global_position = spawns[index].global_position
+	enemy_container.add_child(enemy_instance)
+	enemy_instance.set_difficulty(difficulty)
 
+
+func _on_difficulty_timer_timeout():
+	difficulty += 1
+	SignalManager.difficulty_increased.emit(difficulty)
+	SignalManager.current_difficulty.emit(difficulty)
+	print("difficulty increased to: ", difficulty)
+	var new_wait_time = spawn_timer.wait_time - 0.2
+	spawn_timer.wait_time = clamp(new_wait_time, 1, spawn_timer.wait_time)
+
+func start_game() -> void:
+	current_letter_index = -1
+	difficulty = 0
+	score = 0
+	
+	randomize()
+	spawn_enemy()
+	spawn_timer.start()
+	difficulty_timer.start()
+
+#call this when game over
+func game_over() -> void:
+	active_enemy = null
+	spawn_timer.stop()
+	difficulty_timer.stop()
+	
+	for enemy in enemy_container.get_children():
+		enemy.queue_free()
