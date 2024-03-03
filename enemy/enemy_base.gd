@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
+class_name enemy_base
+
 @export var blue = Color("#4682b4")
 @export var green = Color("#639765")
 @export var red = Color("#a65455")
-
 
 @export var speed: float = 0.2
 

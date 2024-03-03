@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b52265vmjdaw4"]
+[gd_scene load_steps=3 format=3 uid="uid://b52265vmjdaw4"]
 
 [ext_resource type="PackedScene" uid="uid://dm5te3i0gg2l3" path="res://enemy/enemy_base.tscn" id="1_n8atr"]
+[ext_resource type="Script" path="res://enemy/easy_happy_enemy.gd" id="2_ibt76"]
 
 [node name="EasyHappyEnemy" instance=ExtResource("1_n8atr")]
+script = ExtResource("2_ibt76")
 speed = 0.2
