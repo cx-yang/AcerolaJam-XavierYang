@@ -37,7 +37,11 @@ var special_characters = [
 	"?"
 ]
 
-func get_prompt() -> String:
+var dialogue1 =[
+	"help me"
+]
+
+func get_happy_prompt() -> String:
 	var word_index = randi() % happy_words.size()
 	var special_index = randi() % special_characters.size()
 	
@@ -45,7 +49,5 @@ func get_prompt() -> String:
 	var special_character = special_characters[special_index]
 	
 	return word + special_character
-
-
 
 

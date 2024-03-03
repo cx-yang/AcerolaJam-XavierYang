@@ -7,6 +7,7 @@ extends Node2D
 @onready var difficulty_timer = $DifficultyTimer
 
 @onready var game_over_screen = $MenuUI/GOMC
+@onready var menu_ui = $MenuUI
 
 var active_enemy: CharacterBody2D = null
 var current_letter_index: int = -1
@@ -16,6 +17,7 @@ var difficulty: int = 0
 var score: int = 0
 
 var enemy = preload("res://enemy/enemy_base.tscn")
+var easy_happy_enemy = preload("res://enemy/easy_happy_enemy.tscn")
 
 func _ready() -> void:
 	SignalManager.start_game.connect(start_game)
@@ -66,7 +68,7 @@ func _on_spawn_timer_timeout():
 	spawn_enemy()
 
 func spawn_enemy() -> void:
-	var enemy_instance = enemy.instantiate()
+	var enemy_instance = easy_happy_enemy.instantiate()
 	var spawns = spawn_container.get_children()
 	var index = randi() % spawns.size()
 	
@@ -76,6 +78,11 @@ func spawn_enemy() -> void:
 
 
 func _on_difficulty_timer_timeout():
+	if difficulty >= 20:
+		difficulty_timer.stop()
+		difficulty = 20
+		return
+	
 	difficulty += 1
 	SignalManager.difficulty_increased.emit(difficulty)
 	SignalManager.current_difficulty.emit(difficulty)
@@ -101,3 +108,8 @@ func game_over() -> void:
 	
 	for enemy in enemy_container.get_children():
 		enemy.queue_free()
+
+
+func _on_area_2d_body_entered(body):
+	game_over()
+	menu_ui.game_over()

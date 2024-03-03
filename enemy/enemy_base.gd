@@ -4,19 +4,26 @@ extends CharacterBody2D
 @export var green = Color("#639765")
 @export var red = Color("#a65455")
 
+
 @export var speed: float = 0.2
 
 @onready var prompt = $prompt
 @onready var prompt_text = prompt.text
 
+@onready var action_timer = $ActionTimer
+
+var initial_speed: float = 1
+var is_on_screen: bool = false
+
 func _ready():
-	prompt_text = PromptList.get_prompt()
-	prompt.parse_bbcode(set_center_tags(prompt_text))
-	
 	SignalManager.difficulty_increased.connect(handle_difficulty_increase)
+	set_happy_prompt()
 
 func _physics_process(delta: float) -> void:
-	global_position.y += speed
+	if !is_on_screen:
+		global_position.y += initial_speed
+	else:
+		global_position.y += speed
 
 func get_prompt() -> String:
 	return prompt_text
@@ -47,6 +54,11 @@ func set_difficulty(difficulty: int) -> void:
 func handle_difficulty_increase(difficulty: int) -> void:
 	var new_speed = speed + (0.125 * difficulty)
 	speed = clamp(new_speed, speed, 3)
-	
-	
 
+func set_happy_prompt() -> void:
+	prompt_text = PromptList.get_happy_prompt()
+	prompt.parse_bbcode(set_center_tags(prompt_text))
+
+func _on_action_timer_timeout():
+	initial_speed = 0.2
+	is_on_screen = true

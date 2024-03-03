@@ -12,6 +12,7 @@ subpixel_positioning = 0
 
 [node name="EnemyBase" type="CharacterBody2D"]
 script = ExtResource("1_o8la1")
+speed = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_qgtue")
@@ -33,3 +34,10 @@ text = "[center]type this thang?"
 scroll_active = false
 tab_size = 3
 metadata/_edit_use_anchors_ = true
+
+[node name="ActionTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]
