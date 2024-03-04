@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dt7nflcejhhkc"]
+[gd_scene load_steps=7 format=3 uid="uid://dt7nflcejhhkc"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_h8aja"]
 [ext_resource type="PackedScene" uid="uid://cpqk5m62jc80x" path="res://enemy/enemy_container.tscn" id="2_0h28o"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhyef"]
 size = Vector2(1184, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpeto"]
+size = Vector2(1182.5, 20)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h8aja")
@@ -47,7 +50,7 @@ position = Vector2(1057, -91)
 [node name="EnemyContainer" parent="." instance=ExtResource("2_0h28o")]
 
 [node name="EnemyBase" parent="EnemyContainer" instance=ExtResource("2_goikc")]
-position = Vector2(715, 222)
+position = Vector2(739, -14)
 blue = Color(0.27451, 0.509804, 0.705882, 1)
 green = Color(0.388235, 0.592157, 0.396078, 1)
 red = Color(0.65098, 0.329412, 0.333333, 1)
@@ -60,13 +63,21 @@ wait_time = 10.0
 
 [node name="MenuUI" parent="." instance=ExtResource("4_6wlta")]
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(-3, 699)
+[node name="GameOverArea" type="Area2D" parent="."]
+position = Vector2(-7, 774)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverArea"]
 position = Vector2(582, 0)
 shape = SubResource("RectangleShape2D_lhyef")
 
+[node name="PromptMoveArea" type="Area2D" parent="."]
+position = Vector2(-5, 699)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PromptMoveArea"]
+position = Vector2(583.75, -180)
+shape = SubResource("RectangleShape2D_wpeto")
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timer_timeout"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="GameOverArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="PromptMoveArea" to="." method="_on_prompt_move_area_body_entered"]

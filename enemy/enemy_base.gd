@@ -18,6 +18,7 @@ var is_on_screen: bool = false
 
 func _ready():
 	SignalManager.difficulty_increased.connect(handle_difficulty_increase)
+	SignalManager.move_prompt_position.connect(move_prompt_position)
 	set_happy_prompt()
 
 func _physics_process(delta: float) -> void:
@@ -25,6 +26,7 @@ func _physics_process(delta: float) -> void:
 		global_position.y += initial_speed
 	else:
 		global_position.y += speed
+	
 
 func get_prompt() -> String:
 	return prompt_text
@@ -63,3 +65,6 @@ func set_happy_prompt() -> void:
 func _on_action_timer_timeout():
 	initial_speed = 0.2
 	is_on_screen = true
+
+func move_prompt_position() -> void:
+	prompt.position.y -= 170

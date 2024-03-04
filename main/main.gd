@@ -113,3 +113,7 @@ func game_over() -> void:
 func _on_area_2d_body_entered(body):
 	game_over()
 	menu_ui.game_over()
+
+
+func _on_prompt_move_area_body_entered(body):
+	body.move_prompt_position()
