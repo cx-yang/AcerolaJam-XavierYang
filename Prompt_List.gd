@@ -50,4 +50,5 @@ func get_happy_prompt() -> String:
 	
 	return word + special_character
 
-
+func get_salamander_prompt() -> String:
+	return "salamander"

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://buhnielms1bl7"]
+
+[ext_resource type="PackedScene" uid="uid://dm5te3i0gg2l3" path="res://enemy/enemy_base.tscn" id="1_xuqtm"]
+[ext_resource type="Script" path="res://enemy/salamander_enemy.gd" id="2_e386m"]
+
+[node name="Salamander_enemy" instance=ExtResource("1_xuqtm")]
+script = ExtResource("2_e386m")
+speed = 0.2

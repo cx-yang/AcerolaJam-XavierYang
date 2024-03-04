@@ -24,7 +24,7 @@ size_flags_vertical = 3
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="DifficulttyLabel" type="Label" parent="VBoxContainer/HB"]
+[node name="DifficultyLabel" type="Label" parent="VBoxContainer/HB"]
 layout_mode = 2
 text = "Difficulty: 0"
 horizontal_alignment = 1
@@ -33,6 +33,12 @@ vertical_alignment = 1
 [node name="ScoreLabel" type="Label" parent="VBoxContainer/HB"]
 layout_mode = 2
 text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LifePointLabel" type="Label" parent="VBoxContainer/HB"]
+layout_mode = 2
+text = "Life Points: 3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
