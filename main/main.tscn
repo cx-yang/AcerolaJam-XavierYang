@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt7nflcejhhkc"]
+[gd_scene load_steps=8 format=3 uid="uid://dt7nflcejhhkc"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_h8aja"]
 [ext_resource type="PackedScene" uid="uid://cpqk5m62jc80x" path="res://enemy/enemy_container.tscn" id="2_0h28o"]
 [ext_resource type="PackedScene" uid="uid://dm5te3i0gg2l3" path="res://enemy/enemy_base.tscn" id="2_goikc"]
+[ext_resource type="Texture2D" uid="uid://3mrn2g5anyqu" path="res://assets/Pond.png" id="2_gyt3j"]
 [ext_resource type="PackedScene" uid="uid://bns64xsow8lv7" path="res://ui/menu_ui.tscn" id="4_6wlta"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhyef"]
@@ -15,11 +16,17 @@ size = Vector2(1182.5, 20)
 script = ExtResource("1_h8aja")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -12.0
 offset_top = -10.0
 offset_right = 1171.0
 offset_bottom = 661.0
 color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Pond" type="Sprite2D" parent="."]
+position = Vector2(569, 606)
+scale = Vector2(0.944141, 0.95625)
+texture = ExtResource("2_gyt3j")
 
 [node name="SpawnContainer" type="Node2D" parent="."]
 
