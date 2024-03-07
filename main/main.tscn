@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt7nflcejhhkc"]
+[gd_scene load_steps=9 format=3 uid="uid://dt7nflcejhhkc"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_h8aja"]
 [ext_resource type="PackedScene" uid="uid://cpqk5m62jc80x" path="res://enemy/enemy_container.tscn" id="2_0h28o"]
 [ext_resource type="PackedScene" uid="uid://dm5te3i0gg2l3" path="res://enemy/enemy_base.tscn" id="2_goikc"]
-[ext_resource type="Texture2D" uid="uid://3mrn2g5anyqu" path="res://assets/Pond.png" id="2_gyt3j"]
+[ext_resource type="Texture2D" uid="uid://3mrn2g5anyqu" path="res://assets/pond/Pond.png" id="2_gyt3j"]
 [ext_resource type="PackedScene" uid="uid://bns64xsow8lv7" path="res://ui/menu_ui.tscn" id="4_6wlta"]
+[ext_resource type="PackedScene" uid="uid://b7v3s1er0ft2c" path="res://scrolling_bg/scrolling_bg.tscn" id="6_s3rym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhyef"]
 size = Vector2(1184, 20)
@@ -24,6 +25,7 @@ offset_bottom = 661.0
 color = Color(0.129412, 0.129412, 0.129412, 1)
 
 [node name="Pond" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(569, 606)
 scale = Vector2(0.944141, 0.95625)
 texture = ExtResource("2_gyt3j")
@@ -71,7 +73,7 @@ wait_time = 10.0
 [node name="MenuUI" parent="." instance=ExtResource("4_6wlta")]
 
 [node name="GameOverArea" type="Area2D" parent="."]
-position = Vector2(-7, 774)
+position = Vector2(63, 824)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverArea"]
 position = Vector2(582, 0)
@@ -81,8 +83,10 @@ shape = SubResource("RectangleShape2D_lhyef")
 position = Vector2(-5, 699)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PromptMoveArea"]
-position = Vector2(583.75, -180)
+position = Vector2(643, -170)
 shape = SubResource("RectangleShape2D_wpeto")
+
+[node name="ScrollingBG" parent="." instance=ExtResource("6_s3rym")]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timer_timeout"]

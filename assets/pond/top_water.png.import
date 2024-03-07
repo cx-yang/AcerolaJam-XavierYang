@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3qqd365m1hlh"
-path="res://.godot/imported/Salamander5-Sheet.png-ed142d361b7238193f8d075bc44a66ad.ctex"
+uid="uid://bflxf84s5ru04"
+path="res://.godot/imported/top_water.png-1a692b61d417ae9177bd6370b781018a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Salamander5-Sheet.png"
-dest_files=["res://.godot/imported/Salamander5-Sheet.png-ed142d361b7238193f8d075bc44a66ad.ctex"]
+source_file="res://assets/pond/top_water.png"
+dest_files=["res://.godot/imported/top_water.png-1a692b61d417ae9177bd6370b781018a.ctex"]
 
 [params]
 

@@ -23,6 +23,9 @@ func start_game() -> void:
 	gomc.hide()
 	score = 0
 	difficulty = 0
+	get_current_difficulty(0)
+	get_current_score(0)
+	set_life_points(3)
 	SignalManager.start_game.emit()
 
 func game_over() -> void:
@@ -35,7 +38,7 @@ func get_current_score(current_score: int) -> void:
 
 func get_current_difficulty(current_difficulty: int) -> void:
 	difficulty = current_difficulty
-	difficulty_label.text = "Difficulty Level: " + str(difficulty)
+	difficulty_label.text = "Difficulty: " + str(difficulty)
 
 func set_life_points(current_life_points: int) -> void:
 	life_points = current_life_points

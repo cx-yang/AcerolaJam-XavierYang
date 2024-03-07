@@ -3,6 +3,7 @@ extends enemy_base
 func _ready():
 	SignalManager.difficulty_increased.connect(handle_difficulty_increase)
 	SignalManager.move_prompt_position.connect(move_prompt_position)
+	set_random_salamander()
 	set_salamander_prompt()
 
 func _physics_process(delta: float) -> void:

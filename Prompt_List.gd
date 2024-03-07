@@ -1,33 +1,19 @@
 extends Node
 
+var easy_words = [
+	"add up","brown dog","cow tools","","","","","","","","","","","",
+	"","","","","","","","","","","","","","",
+	"","","","","","","","","","","","","","",]
+
 var happy_words = [
-	"achievement",
-	"bubbles",
-	"comical",
-	"definite",
-	"empowered",
-	"favorite",
-	"gnarly",
-	"hospitable",
-	"ideal",
-	"joysome",
-	"knockout",
-	"luminous",
-	"majestic",
-	"neighborly",
-	"organize",
-	"phenomenal",
-	"quirk",
-	"recess",
-	"savvy",
-	"tubular",
-	"urbane",
-	"vivacious",
-	"wizard",
-	"xenodochial",
-	"yay",
-	"zealous"
-]
+	"achievement","bubbles","comical","definite",
+	"empowered","favorite","gnarly","hospitable",
+	"ideal","joysome","knockout","luminous",
+	"majestic","neighborly","organize","phenomenal",
+	"quirk","recess","savvy","tubular",
+	"urbane","vivacious","wizard","xenodochial",
+	"yay","zealous"
+	]
 
 var special_characters = [
 	"",

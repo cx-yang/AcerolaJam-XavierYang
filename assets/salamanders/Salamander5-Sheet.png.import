@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://maes6y620oqu"
-path="res://.godot/imported/Salamander4-Sheet.png-33905fbc0f1aff95379d89d15366ef4b.ctex"
+uid="uid://3qqd365m1hlh"
+path="res://.godot/imported/Salamander5-Sheet.png-f83f742c75a9c6903eafb974cd9c3e81.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Salamander4-Sheet.png"
-dest_files=["res://.godot/imported/Salamander4-Sheet.png-33905fbc0f1aff95379d89d15366ef4b.ctex"]
+source_file="res://assets/salamanders/Salamander5-Sheet.png"
+dest_files=["res://.godot/imported/Salamander5-Sheet.png-f83f742c75a9c6903eafb974cd9c3e81.ctex"]
 
 [params]
 

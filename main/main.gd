@@ -118,6 +118,7 @@ func start_game() -> void:
 	difficulty = 0
 	score = 0
 	life_points = 3
+	spawn_timer.wait_time = 4
 	
 	randomize()
 	spawn_enemy()
@@ -129,6 +130,7 @@ func game_over() -> void:
 	active_enemy = null
 	spawn_timer.stop()
 	difficulty_timer.stop()
+	SignalManager.game_over.emit()
 	
 	for enemy in enemy_container.get_children():
 		enemy.queue_free()
