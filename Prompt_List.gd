@@ -27,6 +27,12 @@ var dialogue1 =[
 	"help me"
 ]
 
+var events = [
+	["apple"],
+	["bottom"],
+	["jeans"]
+]
+
 func get_happy_prompt() -> String:
 	var word_index = randi() % happy_words.size()
 	var special_index = randi() % special_characters.size()
@@ -38,3 +44,6 @@ func get_happy_prompt() -> String:
 
 func get_salamander_prompt() -> String:
 	return "salamander"
+
+func get_event_prompt(event_number: int, position: int) -> String:
+	return events[event_number][position]

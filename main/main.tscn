@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dt7nflcejhhkc"]
+[gd_scene load_steps=10 format=3 uid="uid://dt7nflcejhhkc"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_h8aja"]
 [ext_resource type="PackedScene" uid="uid://cpqk5m62jc80x" path="res://enemy/enemy_container.tscn" id="2_0h28o"]
 [ext_resource type="PackedScene" uid="uid://dm5te3i0gg2l3" path="res://enemy/enemy_base.tscn" id="2_goikc"]
 [ext_resource type="Texture2D" uid="uid://3mrn2g5anyqu" path="res://assets/pond/Pond.png" id="2_gyt3j"]
+[ext_resource type="PackedScene" uid="uid://dhhtv4wriq4ri" path="res://events/event_spawner.tscn" id="3_w20yd"]
 [ext_resource type="PackedScene" uid="uid://bns64xsow8lv7" path="res://ui/menu_ui.tscn" id="4_6wlta"]
 [ext_resource type="PackedScene" uid="uid://b7v3s1er0ft2c" path="res://scrolling_bg/scrolling_bg.tscn" id="6_s3rym"]
 
@@ -55,6 +56,8 @@ position = Vector2(802, -104)
 
 [node name="Marker2D8" type="Marker2D" parent="SpawnContainer"]
 position = Vector2(1057, -91)
+
+[node name="EventSpawner" parent="." instance=ExtResource("3_w20yd")]
 
 [node name="EnemyContainer" parent="." instance=ExtResource("2_0h28o")]
 

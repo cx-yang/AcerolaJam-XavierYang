@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var enemy_container = $EnemyContainer
-@onready var enemy_base = $EnemyBase
+@onready var event_spawner = $EventSpawner
 @onready var spawn_container = $SpawnContainer
 @onready var spawn_timer = $SpawnTimer
 @onready var difficulty_timer = $DifficultyTimer
@@ -17,14 +17,17 @@ var difficulty: int = 0
 var score: int = 0
 var life_points: int = 3
 
+var current_container_type = "enemy"
+var event_number: int = 0
+
 var enemy = preload("res://enemy/enemy_base.tscn")
 var easy_happy_enemy = preload("res://enemy/easy_happy_enemy.tscn")
 var salamander = preload("res://enemy/salamander_enemy.tscn")
+var event_enemy = preload("res://enemy/event_enemy.tscn")
 
 func _ready() -> void:
 	SignalManager.start_game.connect(start_game)
 	start_game()
-	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and not event.is_pressed():
@@ -32,8 +35,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		var key_typed = event.as_text().to_lower() #PackedByteArray([typed_event.unicode]).get_string_from_utf8()
 		#print("Key: ", key_typed)
 		
-		if active_enemy == null:
-			find_new_active_enemy(key_typed)
+		if active_enemy == null: #and if current_container_type == "enemy"
+			find_new_active_enemy(key_typed, current_container_type)
 		elif key_typed == "shift":
 			return
 		else:
@@ -63,7 +66,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				print("incorrectly typed: %s instead of %s " %[key_typed, next_character])
 
-func find_new_active_enemy(typed_character: String):
+#change to take an enemy from either container from parameter call
+func find_new_active_enemy(typed_character: String, container_type: String):
+	#if container_type == "enemy"
 	for enemy in enemy_container.get_children():
 		var prompt = enemy.get_prompt()
 		var next_character = prompt.substr(0,1)
@@ -77,7 +82,8 @@ func find_new_active_enemy(typed_character: String):
 			return
 
 func _on_spawn_timer_timeout():
-	spawn_enemy()
+	#spawn_enemy()
+	spawn_event_enemies()
 
 func spawn_enemy() -> void:
 	var enemy_instance = easy_happy_enemy.instantiate()
@@ -96,6 +102,26 @@ func spawn_salamander() -> void:
 	enemy_instance.global_position = spawns[index].global_position
 	enemy_container.add_child(enemy_instance)
 	enemy_instance.set_difficulty(difficulty)
+
+func spawn_event_enemies() -> void:
+	var enemy_instance1 = event_enemy.instantiate()
+	var enemy_instance2 = event_enemy.instantiate()
+	var enemy_instance3 = event_enemy.instantiate()
+	
+	
+	#enemy_instance2.set_event_prompt(event_number,1)
+	#enemy_instance3.set_event_prompt(event_number,2)
+	
+	var spawns = spawn_container.get_children()
+	enemy_instance1.global_position = spawns[1].global_position
+	enemy_instance2.global_position = spawns[4].global_position
+	enemy_instance3.global_position = spawns[7].global_position
+	
+	event_spawner.add_child(enemy_instance1)
+	event_spawner.add_child(enemy_instance2)
+	event_spawner.add_child(enemy_instance3)
+	
+	enemy_instance1.set_event_prompt(0,0)
 
 func _on_difficulty_timer_timeout():
 	if difficulty >= 20:
@@ -120,8 +146,8 @@ func start_game() -> void:
 	life_points = 3
 	spawn_timer.wait_time = 4
 	
-	randomize()
-	spawn_enemy()
+	#randomize()
+	#spawn_enemy()
 	spawn_timer.start()
 	difficulty_timer.start()
 

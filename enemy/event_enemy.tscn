@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbidmsexkcv7s"]
+
+[ext_resource type="PackedScene" uid="uid://dm5te3i0gg2l3" path="res://enemy/enemy_base.tscn" id="1_rtdsh"]
+[ext_resource type="Script" path="res://enemy/event_enemy.gd" id="2_bvgdu"]
+
+[node name="EventEnemy" instance=ExtResource("1_rtdsh")]
+script = ExtResource("2_bvgdu")
+event_number = 0
+option_number = 0
+speed = 0.2

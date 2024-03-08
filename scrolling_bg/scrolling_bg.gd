@@ -5,7 +5,7 @@ func _ready():
 	SignalManager.start_game.connect(start_game)
 
 func _process(delta):
-	scroll_offset.y += 100 * delta
+	scroll_offset.y -= 100 * delta
 
 func game_over() -> void:
 	set_process(false)
