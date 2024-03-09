@@ -14,7 +14,6 @@ script = ExtResource("1_lgwma")
 
 [node name="BottomWater" parent="." instance=ExtResource("2_ednda")]
 texture = ExtResource("8_tlard")
-scroll_scale = 0.3
 
 [node name="MiddleWater" parent="." instance=ExtResource("2_ednda")]
 texture = ExtResource("7_l6u23")
