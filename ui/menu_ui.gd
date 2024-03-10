@@ -5,12 +5,16 @@ extends CanvasLayer
 @onready var difficulty_label = $VBoxContainer/HB/DifficultyLabel
 @onready var life_point_label = $VBoxContainer/HB/LifePointLabel
 
+@onready var tutorial_mc = $TutorialMC
+@onready var start_button = $TutorialMC/MarginContainer/StartButton
+
 var score: int = 0
 var difficulty: int = 0
 var life_points: int = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	MusicController.play_salamander_theme()
 	start_game()
 	
 	SignalManager.current_score.connect(get_current_score)
@@ -43,3 +47,8 @@ func get_current_difficulty(current_difficulty: int) -> void:
 func set_life_points(current_life_points: int) -> void:
 	life_points = current_life_points
 	life_point_label.text = "Life Points: " + str(life_points)
+
+
+func _on_start_button_pressed():
+	tutorial_mc.hide()
+	start_game()

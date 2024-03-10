@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PromptList="*res://Prompt_List.gd"
 SignalManager="*res://singletons/signal_manager.gd"
+MusicController="*res://singletons/music_controller.tscn"
 
 [display]
 

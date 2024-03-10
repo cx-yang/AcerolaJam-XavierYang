@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt7nflcejhhkc"]
+[gd_scene load_steps=9 format=3 uid="uid://dt7nflcejhhkc"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_h8aja"]
 [ext_resource type="PackedScene" uid="uid://cpqk5m62jc80x" path="res://enemy/enemy_container.tscn" id="2_0h28o"]
 [ext_resource type="PackedScene" uid="uid://dhhtv4wriq4ri" path="res://events/event_spawner.tscn" id="3_w20yd"]
 [ext_resource type="PackedScene" uid="uid://bns64xsow8lv7" path="res://ui/menu_ui.tscn" id="4_6wlta"]
+[ext_resource type="AudioStream" uid="uid://38mvi7g7ykr2" path="res://assets/sfx/correct_sound4.wav" id="6_0mml2"]
 [ext_resource type="PackedScene" uid="uid://b7v3s1er0ft2c" path="res://scrolling_bg/scrolling_bg.tscn" id="6_s3rym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhyef"]
@@ -78,6 +79,9 @@ wait_time = 4.0
 [node name="DifficultyTimer" type="Timer" parent="."]
 wait_time = 10.0
 
+[node name="SalamanderTimer" type="Timer" parent="."]
+wait_time = 10.0
+
 [node name="MenuUI" parent="." instance=ExtResource("4_6wlta")]
 
 [node name="GameOverArea" type="Area2D" parent="."]
@@ -96,7 +100,12 @@ shape = SubResource("RectangleShape2D_wpeto")
 
 [node name="ScrollingBG" parent="." instance=ExtResource("6_s3rym")]
 
+[node name="TypingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_0mml2")
+pitch_scale = 0.85
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timer_timeout"]
+[connection signal="timeout" from="SalamanderTimer" to="." method="_on_salamander_timer_timeout"]
 [connection signal="body_entered" from="GameOverArea" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="PromptMoveArea" to="." method="_on_prompt_move_area_body_entered"]

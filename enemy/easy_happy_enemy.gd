@@ -11,4 +11,7 @@ func _physics_process(delta: float) -> void:
 		global_position.y += initial_speed
 	else:
 		global_position.y += speed
-	
+
+func set_gibberish_prompt() -> void:
+	prompt_text = PromptList.get_gibberish_prompt()
+	prompt.parse_bbcode(set_center_tags(prompt_text))

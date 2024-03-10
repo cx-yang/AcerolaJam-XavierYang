@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bns64xsow8lv7"]
+[gd_scene load_steps=4 format=3 uid="uid://bns64xsow8lv7"]
 
 [ext_resource type="Script" path="res://ui/menu_ui.gd" id="1_ibrtd"]
+[ext_resource type="Texture2D" uid="uid://3mrn2g5anyqu" path="res://assets/pond/Pond.png" id="2_ddmnv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_35rdm"]
 
@@ -80,6 +81,10 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 50
 
+[node name="ScoreLabel" type="Label" parent="GOMC/GameOverScreen/CC/VB"]
+layout_mode = 2
+text = "New High Score: 0000"
+
 [node name="LoseLabel" type="Label" parent="GOMC/GameOverScreen/CC/VB"]
 layout_mode = 2
 text = "You lose"
@@ -91,4 +96,38 @@ layout_mode = 2
 text = "Restart"
 flat = true
 
+[node name="TutorialMC" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TutorialMC"]
+layout_mode = 2
+texture = ExtResource("2_ddmnv")
+region_rect = Rect2(-8, 0, 1296, 1280)
+patch_margin_left = 368
+patch_margin_top = 384
+patch_margin_right = 387
+patch_margin_bottom = 496
+
+[node name="MarginContainer" type="MarginContainer" parent="TutorialMC"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 150
+
+[node name="StartButton" type="Button" parent="TutorialMC/MarginContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+text = "Start Game"
+
 [connection signal="pressed" from="GOMC/GameOverScreen/CC/VB/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="TutorialMC/MarginContainer/StartButton" to="." method="_on_start_button_pressed"]
