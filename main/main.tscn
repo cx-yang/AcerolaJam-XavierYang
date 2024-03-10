@@ -19,55 +19,76 @@ script = ExtResource("1_h8aja")
 [node name="SpawnContainer" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(933, -84)
+position = Vector2(93, -74)
 
 [node name="Marker2D2" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(681, -97)
+position = Vector2(136, -102)
 
 [node name="Marker2D3" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(410, -89)
+position = Vector2(167, -76)
 
 [node name="Marker2D4" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(121, -86)
+position = Vector2(209, -106)
 
 [node name="Marker2D5" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(251, -86)
+position = Vector2(244, -78)
 
 [node name="Marker2D6" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(546, -106)
+position = Vector2(291, -107)
 
 [node name="Marker2D7" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(802, -104)
+position = Vector2(320, -81)
 
 [node name="Marker2D8" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(1057, -91)
+position = Vector2(369, -107)
 
 [node name="Marker2D9" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(1165, -94)
+position = Vector2(402, -78)
 
 [node name="Marker2D10" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(988, -126)
+position = Vector2(450, -111)
 
 [node name="Marker2D11" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(870, -135)
+position = Vector2(479, -83)
 
 [node name="Marker2D12" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(744, -131)
+position = Vector2(541, -112)
 
 [node name="Marker2D13" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(614, -130)
+position = Vector2(594, -82)
 
 [node name="Marker2D14" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(479, -125)
+position = Vector2(657, -112)
 
 [node name="Marker2D15" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(337, -119)
+position = Vector2(706, -82)
 
 [node name="Marker2D16" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(191, -118)
+position = Vector2(761, -117)
 
 [node name="Marker2D17" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(1131, -128)
+position = Vector2(761, -117)
+
+[node name="Marker2D18" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(800, -82)
+
+[node name="Marker2D19" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(859, -119)
+
+[node name="Marker2D20" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(912, -88)
+
+[node name="Marker2D21" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(969, -121)
+
+[node name="Marker2D22" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(1021, -87)
+
+[node name="Marker2D23" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(1089, -124)
+
+[node name="Marker2D24" type="Marker2D" parent="SpawnContainer"]
+position = Vector2(1138, -94)
 
 [node name="EventSpawner" parent="." instance=ExtResource("3_w20yd")]
 

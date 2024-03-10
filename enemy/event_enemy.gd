@@ -6,10 +6,8 @@ extends enemy_base
 var next_event_number: int = 0
 
 func _ready():
-	#SignalManager.difficulty_increased.connect(handle_difficulty_increase)
 	SignalManager.move_prompt_position.connect(move_prompt_position)
 	set_random_salamander()
-	#set_event_prompt()
 
 func _physics_process(delta: float) -> void:
 	if !is_on_screen:

@@ -18,6 +18,7 @@ var last_spawn_number: int = 0
 var difficulty: int = 0
 var score: int = 0
 var life_points: int = 3
+var is_game_over: bool = false
 
 var current_container_type = "enemy"
 var event_number: int = 0
@@ -25,15 +26,16 @@ var prompt_and_answer_count: int = 0 #keeps track of the prompts and answers
 var can_spawn_event: bool = false
 var loop_count: int = 0 #when this gets to a certain number after the event spawn, change the prompt in the spawner
 
-var easy_happy_enemy = preload("res://enemy/easy_happy_enemy.tscn")
-var salamander = preload("res://enemy/salamander_enemy.tscn")
-var event_enemy = preload("res://enemy/event_enemy.tscn")
+var easy_happy_enemy: PackedScene = preload("res://enemy/easy_happy_enemy.tscn")
+var salamander: PackedScene = preload("res://enemy/salamander_enemy.tscn")
+var event_enemy: PackedScene = preload("res://enemy/event_enemy.tscn")
+var explosion: PackedScene = preload("res://enemy/enemy_explosion.tscn")
 
 func _ready() -> void:
 	SignalManager.start_game.connect(start_game)
 
 func _process(delta):
-	if can_spawn_event and enemy_container.get_child_count() == 0 and event_number != 24:
+	if can_spawn_event and enemy_container.get_child_count() == 0 and event_number != 24 and !is_game_over:
 		current_container_type = "event"
 		can_spawn_event = false
 		spawn_event_enemies()
@@ -116,32 +118,33 @@ func spawn_salamander() -> void:
 	var enemy_instance = salamander.instantiate()
 	spawn_enemy_type(enemy_instance, enemy_container)
 
-func spawn_enemy_type(enemy_instance: enemy_base, container_type: Node2D)-> void:
+func spawn_enemy_type(enemy_instance: enemy_base, container_type: Node2D, can_set_difficulty: bool = true)-> void:
 	var spawns = spawn_container.get_children()
 	var index = randi() % spawns.size()
 	
 	enemy_instance.global_position = spawns[index].global_position
 	container_type.add_child(enemy_instance)
-	enemy_instance.set_difficulty(difficulty)
+	if can_set_difficulty:
+		enemy_instance.set_difficulty(difficulty)
 
 func spawn_event_enemies() -> void:
 	var current_event_number = event_number
 	SignalManager.current_difficulty.emit(current_event_number * 13)
 	
 	if PromptList.get_event_size(current_event_number) > 2:
-		var index: int = 1
+		var index: int = randi() % 6
 		var enemy_position: int = 0
 		for n in 3:
 			var enemy_instance = event_enemy.instantiate()
 			var spawns = spawn_container.get_children()
 			enemy_instance.global_position = spawns[index].global_position
-			index += randi() % 5 + 2
+			index += 6
 			event_spawner.add_child(enemy_instance)
 			enemy_instance.set_event_prompt(current_event_number, enemy_position)
 			enemy_position += 2
 	else:
 		var enemy_instance = event_enemy.instantiate()
-		spawn_enemy_type(enemy_instance, event_spawner)
+		spawn_enemy_type(enemy_instance, event_spawner, false)
 		enemy_instance.set_event_prompt(current_event_number,0)
 
 func _on_difficulty_timer_timeout():
@@ -165,11 +168,13 @@ func start_game() -> void:
 	event_number = 0
 	life_points = 3
 	spawn_timer.wait_time = 4
+	is_game_over = false
 	start_timers()
 
 func game_over() -> void:
 	active_enemy = null
 	stop_timers()
+	is_game_over = true
 	SignalManager.game_over.emit()
 	continer_cleaning(enemy_container)
 	continer_cleaning(event_spawner)
@@ -181,6 +186,7 @@ func _on_area_2d_body_entered(body):
 	print(life_points)
 	if active_enemy != null:
 		if active_enemy.get_prompt() == body.get_prompt():
+			create_explosion(body.global_position)
 			active_enemy.queue_free()
 			active_enemy = null
 	else:
@@ -202,12 +208,14 @@ func correct_key_pressed() -> void:
 func reset_properties() -> void:
 	SignalManager.current_score.emit(score)
 	current_letter_index = -1
+	create_explosion(active_enemy.global_position)
 	active_enemy.queue_free()
 	active_enemy = null
 
 func continer_cleaning(container_type: Node2D) -> void:
 	for enemy in container_type.get_children():
 		score += enemy.get_prompt().length() * 80
+		create_explosion(enemy.global_position)
 		enemy.queue_free()
 
 func start_timers() -> void:
@@ -219,3 +227,8 @@ func stop_timers() -> void:
 	spawn_timer.stop()
 	difficulty_timer.stop()
 	salamander_timer.stop()
+
+func create_explosion(start_posititon: Vector2) -> void:
+	var new_explosion = explosion.instantiate()
+	new_explosion.global_position = start_posititon
+	spawn_container.add_child(new_explosion)

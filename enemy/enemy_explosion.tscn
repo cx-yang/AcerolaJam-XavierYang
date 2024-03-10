@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://di1mbii30llev"]
+
+[ext_resource type="Texture2D" uid="uid://dn3ucrg831off" path="res://assets/poof-Sheet.png" id="1_54o2y"]
+[ext_resource type="Script" path="res://enemy/enemy_explosion.gd" id="2_0w645"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2rr7"]
+atlas = ExtResource("1_54o2y")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeuqx"]
+atlas = ExtResource("1_54o2y")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hclym"]
+atlas = ExtResource("1_54o2y")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ec2l3"]
+atlas = ExtResource("1_54o2y")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmf3l"]
+atlas = ExtResource("1_54o2y")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3t21"]
+atlas = ExtResource("1_54o2y")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fevyp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2rr7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jeuqx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hclym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ec2l3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmf3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3t21")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="EnemyExplosion" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_fevyp")
+autoplay = "default"
+frame = 5
+frame_progress = 1.0
+script = ExtResource("2_0w645")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

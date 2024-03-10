@@ -14,9 +14,3 @@ func play_salamander_theme() -> void:
 
 func stop_music() -> void:
 	music.stop()
-
-func lower_music() -> void:
-	music.volume_db = -9
-
-func lowest_music() -> void:
-	music.volume_db = -11

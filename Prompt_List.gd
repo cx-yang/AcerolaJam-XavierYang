@@ -30,7 +30,7 @@ var special_characters = [
 #String is the prompt. Number after is the array position to make the event handler go to
 var events = [
 	["do you like fruit?", 1],
-	["papayas!", 2, "limes!", 2, "plums!", 2],
+	["papayas!", 2, "limes!", 2, "watermelon!", 2],
 	["do you have pets?", 3],
 	["yup", 4, "nah", 4, "lots of them!", 4],
 	["what do you see?",  5],
@@ -51,30 +51,27 @@ var events = [
 	["break it", 20, "break it", 20, "break it", 20],
 	["painful", 21],
 	["i am sorry", 22, "be done soon", 22, "hang in there", 22],
-	["cut the arm off", 23],
+	["cut the arm", 23],
 	["and cut it", 22, "then cut it more", 22, "until it is disconnected", 24],
 ]
 
 func get_happy_prompt() -> String:
-	var word_index = randi() % happy_words.size()
+	return get_prompt(happy_words)
+
+func get_gibberish_prompt() -> String:
+	return get_prompt(gibberish)
+
+func get_prompt(array_type: Array) -> String:
+	var word_index = randi() % array_type.size()
 	var special_index = randi() % special_characters.size()
 	
-	var word = happy_words[word_index]
+	var word = array_type[word_index]
 	var special_character = special_characters[special_index]
 	
 	return word + special_character
 
 func get_salamander_prompt() -> String:
 	return "salamander"
-
-func get_gibberish_prompt() -> String:
-	var word_index = randi() % gibberish.size()
-	var special_index = randi() % special_characters.size()
-	
-	var word = gibberish[word_index]
-	var special_character = special_characters[special_index]
-	
-	return word + special_character
 
 #check if event_size > 1 to differentiate spawning the prompt or options
 func get_event_size(event_number: int) -> int:
