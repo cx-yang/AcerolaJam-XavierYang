@@ -1,19 +1,94 @@
-[gd_scene load_steps=4 format=3 uid="uid://bns64xsow8lv7"]
+[gd_scene load_steps=12 format=3 uid="uid://bns64xsow8lv7"]
 
 [ext_resource type="Script" path="res://ui/menu_ui.gd" id="1_ibrtd"]
-[ext_resource type="Texture2D" uid="uid://3mrn2g5anyqu" path="res://assets/pond/Pond.png" id="2_ddmnv"]
+[ext_resource type="Texture2D" uid="uid://blctmhk1oy4hc" path="res://assets/score_frame.png" id="2_bpstc"]
+[ext_resource type="Texture2D" uid="uid://b8251yfc44i1y" path="res://assets/salamander_title.png" id="2_rguxn"]
+[ext_resource type="Texture2D" uid="uid://cnx4tovlrc26c" path="res://assets/press_enter-Sheet.png" id="3_ftdi3"]
+
+[sub_resource type="SystemFont" id="SystemFont_ndra8"]
+font_names = PackedStringArray("Segoe Print")
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_35rdm"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_8g73v"]
+font_names = PackedStringArray("Segoe Print")
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_noeqt"]
+font_names = PackedStringArray("Segoe Print")
+subpixel_positioning = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gi1m"]
+atlas = ExtResource("3_ftdi3")
+region = Rect2(0, 0, 318, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0oxqg"]
+atlas = ExtResource("3_ftdi3")
+region = Rect2(318, 0, 318, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ho7q2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gi1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0oxqg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
 
 [node name="MenuUI" type="CanvasLayer"]
 script = ExtResource("1_ibrtd")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 9.0
-offset_top = 672.0
-offset_right = 510.0
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+modulate = Color(1, 1, 1, 0.917647)
+custom_minimum_size = Vector2(150, 0)
+offset_left = 40.0
+offset_top = 667.0
+offset_right = 190.0
 offset_bottom = 703.0
-color = Color(0.196078, 0.196078, 0.196078, 1)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_bpstc")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+modulate = Color(1, 1, 1, 0.917647)
+custom_minimum_size = Vector2(150, 0)
+offset_left = 235.0
+offset_top = 667.0
+offset_right = 385.0
+offset_bottom = 703.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_bpstc")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="."]
+modulate = Color(1, 1, 1, 0.917647)
+custom_minimum_size = Vector2(150, 0)
+offset_left = 432.0
+offset_top = 666.0
+offset_right = 582.0
+offset_bottom = 702.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("2_bpstc")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 15
@@ -34,26 +109,33 @@ size_flags_vertical = 3
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="DifficultyLabel" type="Label" parent="VBoxContainer/HB"]
-custom_minimum_size = Vector2(125, 0)
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HB"]
 layout_mode = 2
+
+[node name="DifficultyLabel" type="Label" parent="VBoxContainer/HB"]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_ndra8")
+theme_override_font_sizes/font_size = 16
 text = "Difficulty: 0"
 label_settings = SubResource("LabelSettings_35rdm")
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="VBoxContainer/HB"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(145, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_8g73v")
 text = "Score: 0"
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LifePointLabel" type="Label" parent="VBoxContainer/HB"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(145, 0)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_noeqt")
 text = "Life Points: 3"
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
@@ -81,7 +163,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="ScoreLabel" type="Label" parent="GOMC/GameOverScreen/CC/VB"]
+[node name="FinalScoreLabel" type="Label" parent="GOMC/GameOverScreen/CC/VB"]
 layout_mode = 2
 text = "New High Score: 0000"
 
@@ -107,27 +189,14 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 100
 
-[node name="NinePatchRect" type="NinePatchRect" parent="TutorialMC"]
+[node name="TutorialScreen" type="TextureRect" parent="TutorialMC"]
 layout_mode = 2
-texture = ExtResource("2_ddmnv")
-region_rect = Rect2(-8, 0, 1296, 1280)
-patch_margin_left = 368
-patch_margin_top = 384
-patch_margin_right = 387
-patch_margin_bottom = 496
+texture = ExtResource("2_rguxn")
 
-[node name="MarginContainer" type="MarginContainer" parent="TutorialMC"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_constants/margin_left = 150
-theme_override_constants/margin_top = 150
-theme_override_constants/margin_right = 150
-theme_override_constants/margin_bottom = 150
-
-[node name="StartButton" type="Button" parent="TutorialMC/MarginContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
-text = "Start Game"
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TutorialMC/TutorialScreen"]
+position = Vector2(632, 662)
+sprite_frames = SubResource("SpriteFrames_ho7q2")
+autoplay = "default"
+frame_progress = 0.712368
 
 [connection signal="pressed" from="GOMC/GameOverScreen/CC/VB/RestartButton" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="TutorialMC/MarginContainer/StartButton" to="." method="_on_start_button_pressed"]

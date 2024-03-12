@@ -7,16 +7,16 @@ var happy_words = [
 	"add up","brown dog","cow tools","doing","funny","good job","hat","instant","jump","kitty","love","music","nice crock","ocelot",
 	"party","quiz","red","tuba","umbrella","victory","wumbo","year","zoo","above you","birthday","cotton",
 	"drink water","eyes","flower","giraffe","honey","idea","jump","knock knock","learn","mail time",
-	"neptune","outside pool","power stance","quesadilla", "reptile", "turtle power", "until","visit friends",
+	"neptune","outside pool","power","quesadilla", "reptile", "turtle power", "until","visit friends",
 	"wack"
 ]
 
 var gibberish = [
-	"wieonxvio", "ppwixlvj", "zienvlawl", "vbncn", "xmzlvxlwifnng", "wivh", "ciwls", "vdfipoushs", "awovn", "mbkf",
-	"xdohgiugjd", "oewrvugh", "evun", "gbeno", "zawhiv", "qocklcid", "rivns", "nrgh", "oij owp", 
-	"undgyt", "ohmlmk", "hofj ff", "nxot", "xyambu", "eibja", "goowlnvlz", "wppvjst", "lalsldlflglhl", 
-	"cjeqlf", "yhnujm", "tixei", "appeppa", "fzw", "qpcol", "dlxn", 
-	"yuwoeyy", "hslfjskk", "mnxbvb", "unlihj", "jkl jklj jkl", "fsfpi" 
+	"dolor", "amet", "consectetur", "adipiscing", "elit", "zed", "do", "eiusmod ", "tempor", "incididunt", "ut", "agna", "aliqua",
+	 "lem", "nulla", "pharetra", "diam", "tristique", "purus", "gravida", "blandit", "turpis", "cursus",
+	 "volutpat", "velit", "egestas", "dui", "ornare", "mi", "in", "ultrices", "maecenas", "enim", "neque",
+	 "risus", "laoreet", "interdum", "feugiat", "fusce", "elementum", "gravida", "ornare", "platea", "nibh", "quisque", "venenatis",
+	 "uet", "rhoncus", "porttitor", "habitant", "bibendum", "del"
 ]
 
 var special_characters = [

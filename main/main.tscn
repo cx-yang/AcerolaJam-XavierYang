@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dt7nflcejhhkc"]
+[gd_scene load_steps=10 format=3 uid="uid://dt7nflcejhhkc"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_h8aja"]
 [ext_resource type="PackedScene" uid="uid://cpqk5m62jc80x" path="res://enemy/enemy_container.tscn" id="2_0h28o"]
 [ext_resource type="PackedScene" uid="uid://dhhtv4wriq4ri" path="res://events/event_spawner.tscn" id="3_w20yd"]
 [ext_resource type="PackedScene" uid="uid://bns64xsow8lv7" path="res://ui/menu_ui.tscn" id="4_6wlta"]
-[ext_resource type="AudioStream" uid="uid://38mvi7g7ykr2" path="res://assets/sfx/correct_sound4.wav" id="6_0mml2"]
+[ext_resource type="AudioStream" uid="uid://cslm462dn7t5h" path="res://assets/sfx/CorrectSound5.mp3" id="6_egh1l"]
 [ext_resource type="PackedScene" uid="uid://b7v3s1er0ft2c" path="res://scrolling_bg/scrolling_bg.tscn" id="6_s3rym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhyef"]
@@ -12,6 +12,8 @@ size = Vector2(1184, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpeto"]
 size = Vector2(1182.5, 20)
+
+[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_gi2x6"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h8aja")
@@ -122,8 +124,11 @@ shape = SubResource("RectangleShape2D_wpeto")
 [node name="ScrollingBG" parent="." instance=ExtResource("6_s3rym")]
 
 [node name="TypingSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_0mml2")
+stream = ExtResource("6_egh1l")
 pitch_scale = 0.85
+
+[node name="EventSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMP3_gi2x6")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timer_timeout"]

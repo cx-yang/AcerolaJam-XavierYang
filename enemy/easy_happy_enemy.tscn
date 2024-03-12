@@ -9,7 +9,7 @@ bg_color = Color(0, 0, 0, 1)
 
 [node name="EasyHappyEnemy" instance=ExtResource("1_n8atr")]
 script = ExtResource("2_ibt76")
-speed = 0.2
+speed = 0.1
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("3_aiih4")

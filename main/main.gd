@@ -10,6 +10,7 @@ extends Node2D
 @onready var game_over_screen = $MenuUI/GOMC
 @onready var menu_ui = $MenuUI
 @onready var typing_sound = $TypingSound
+@onready var event_sound = $EventSound
 
 var active_enemy: CharacterBody2D = null
 var current_letter_index: int = -1
@@ -19,6 +20,9 @@ var difficulty: int = 0
 var score: int = 0
 var life_points: int = 3
 var is_game_over: bool = false
+var gibberish_active: bool = false
+
+var playing_after_song: bool = false
 
 var current_container_type = "enemy"
 var event_number: int = 0
@@ -31,6 +35,9 @@ var salamander: PackedScene = preload("res://enemy/salamander_enemy.tscn")
 var event_enemy: PackedScene = preload("res://enemy/event_enemy.tscn")
 var explosion: PackedScene = preload("res://enemy/enemy_explosion.tscn")
 
+var bone_sfx: AudioStreamMP3 = preload("res://assets/sfx/BoneSnap.mp3")
+var slice_sfx: AudioStreamMP3 = preload("res://assets/sfx/slice.mp3")
+
 func _ready() -> void:
 	SignalManager.start_game.connect(start_game)
 
@@ -39,6 +46,10 @@ func _process(delta):
 		current_container_type = "event"
 		can_spawn_event = false
 		spawn_event_enemies()
+	
+	if event_number >= 24 and !playing_after_song:
+		MusicController.play_after()
+		playing_after_song = true
 	
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -65,10 +76,16 @@ func _unhandled_input(event: InputEvent) -> void:
 						reset_properties()
 						#restart game loop
 						if prompt_and_answer_count >= 1:
+							
+							if prompt == "break it":
+								play_event_sfx(bone_sfx)
+							if prompt == "and cut it" or prompt == "then cut it more" or prompt == "until it is disconnected":
+								play_event_sfx(slice_sfx)
+							
 							prompt_and_answer_count = 0
 							start_timers()
 							difficulty = 2
-							SignalManager.current_difficulty.emit(difficulty)
+							SignalManager.current_difficulty.emit(loop_count)
 							current_container_type = "enemy"
 						else:
 							prompt_and_answer_count += 1
@@ -129,7 +146,7 @@ func spawn_enemy_type(enemy_instance: enemy_base, container_type: Node2D, can_se
 
 func spawn_event_enemies() -> void:
 	var current_event_number = event_number
-	SignalManager.current_difficulty.emit(current_event_number * 13)
+	SignalManager.current_difficulty.emit(current_event_number * 13 + 13)
 	
 	if PromptList.get_event_size(current_event_number) > 2:
 		var index: int = randi() % 6
@@ -148,20 +165,22 @@ func spawn_event_enemies() -> void:
 		enemy_instance.set_event_prompt(current_event_number,0)
 
 func _on_difficulty_timer_timeout():
+	loop_count += 1
+	SignalManager.current_difficulty.emit(loop_count)
 	if difficulty >= 3 and event_number != 24:
 		stop_timers()
 		difficulty = 3
 		can_spawn_event = true
 		return
-	
 	difficulty += 1
 	SignalManager.difficulty_increased.emit(difficulty)
-	SignalManager.current_difficulty.emit(difficulty)
 	print("difficulty increased to: ", difficulty)
 	var new_wait_time = spawn_timer.wait_time - 0.2
 	spawn_timer.wait_time = clamp(new_wait_time, 1, spawn_timer.wait_time)
 
 func start_game() -> void:
+	if is_game_over:
+		MusicController.play_salamander_theme()
 	current_letter_index = -1
 	difficulty = 0
 	score = 0
@@ -172,6 +191,7 @@ func start_game() -> void:
 	start_timers()
 
 func game_over() -> void:
+	MusicController.play_game_over_theme()
 	active_enemy = null
 	stop_timers()
 	is_game_over = true
@@ -217,6 +237,7 @@ func continer_cleaning(container_type: Node2D) -> void:
 		score += enemy.get_prompt().length() * 80
 		create_explosion(enemy.global_position)
 		enemy.queue_free()
+	SignalManager.current_score.emit(score)
 
 func start_timers() -> void:
 	spawn_timer.start()
@@ -232,3 +253,7 @@ func create_explosion(start_posititon: Vector2) -> void:
 	var new_explosion = explosion.instantiate()
 	new_explosion.global_position = start_posititon
 	spawn_container.add_child(new_explosion)
+
+func play_event_sfx(sound_type: AudioStreamMP3) -> void:
+	event_sound.stream = sound_type
+	event_sound.play()
