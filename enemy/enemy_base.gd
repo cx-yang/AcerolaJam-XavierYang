@@ -81,3 +81,8 @@ func set_random_salamander() -> void:
 	var number = randi_range(0, salamander_arr.size()-1)
 	sprite_2d.texture = salamander_arr[number]
 	sprite_2d.hframes = 12
+
+func poof_me() -> void:
+	set_process(false)
+	hide()
+	queue_free()

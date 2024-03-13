@@ -11,9 +11,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	if !is_on_screen:
-		global_position.y += initial_speed
-	else:
-		global_position.y += speed
+		global_position.y += initial_speed + 1
 
 func set_option_number(option: int) -> void:
 	option_number = option

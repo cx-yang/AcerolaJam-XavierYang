@@ -8,7 +8,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	if !is_on_screen:
-		global_position.y += initial_speed
+		global_position.y += initial_speed + 1
 	else:
 		global_position.y += speed
 

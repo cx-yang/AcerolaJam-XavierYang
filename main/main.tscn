@@ -97,13 +97,13 @@ position = Vector2(1138, -94)
 [node name="EnemyContainer" parent="." instance=ExtResource("2_0h28o")]
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 5.5
 
 [node name="DifficultyTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 22.0
 
 [node name="SalamanderTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 18.0
 
 [node name="MenuUI" parent="." instance=ExtResource("4_6wlta")]
 

@@ -30,10 +30,10 @@ var prompt_and_answer_count: int = 0 #keeps track of the prompts and answers
 var can_spawn_event: bool = false
 var loop_count: int = 0 #when this gets to a certain number after the event spawn, change the prompt in the spawner
 
-var easy_happy_enemy: PackedScene = preload("res://enemy/easy_happy_enemy.tscn")
-var salamander: PackedScene = preload("res://enemy/salamander_enemy.tscn")
-var event_enemy: PackedScene = preload("res://enemy/event_enemy.tscn")
-var explosion: PackedScene = preload("res://enemy/enemy_explosion.tscn")
+var easy_happy_enemy: PackedScene = load("res://enemy/easy_happy_enemy.tscn")
+var salamander: PackedScene = load("res://enemy/salamander_enemy.tscn")
+var event_enemy: PackedScene = load("res://enemy/event_enemy.tscn")
+var explosion: PackedScene = load("res://enemy/enemy_explosion.tscn")
 
 var bone_sfx: AudioStreamMP3 = preload("res://assets/sfx/BoneSnap.mp3")
 var slice_sfx: AudioStreamMP3 = preload("res://assets/sfx/slice.mp3")
@@ -161,7 +161,12 @@ func spawn_event_enemies() -> void:
 			enemy_position += 2
 	else:
 		var enemy_instance = event_enemy.instantiate()
-		spawn_enemy_type(enemy_instance, event_spawner, false)
+		var spawns = spawn_container.get_children()
+		var index = randi() % spawns.size()
+		
+		enemy_instance.global_position = spawns[index].global_position
+		event_spawner.add_child(enemy_instance)
+		#spawn_enemy_type(enemy_instance, event_spawner, false)
 		enemy_instance.set_event_prompt(current_event_number,0)
 
 func _on_difficulty_timer_timeout():
@@ -175,7 +180,7 @@ func _on_difficulty_timer_timeout():
 	difficulty += 1
 	SignalManager.difficulty_increased.emit(difficulty)
 	print("difficulty increased to: ", difficulty)
-	var new_wait_time = spawn_timer.wait_time - 0.2
+	var new_wait_time = spawn_timer.wait_time - 0.15
 	spawn_timer.wait_time = clamp(new_wait_time, 1, spawn_timer.wait_time)
 
 func start_game() -> void:
@@ -194,10 +199,12 @@ func game_over() -> void:
 	MusicController.play_game_over_theme()
 	active_enemy = null
 	stop_timers()
+	event_number = 0
+	can_spawn_event = false
 	is_game_over = true
 	SignalManager.game_over.emit()
-	continer_cleaning(enemy_container)
-	continer_cleaning(event_spawner)
+	continer_cleaning(enemy_container,false)
+	continer_cleaning(event_spawner, false)
 
 #when the enemy gets off screen
 func _on_area_2d_body_entered(body):
@@ -207,10 +214,10 @@ func _on_area_2d_body_entered(body):
 	if active_enemy != null:
 		if active_enemy.get_prompt() == body.get_prompt():
 			create_explosion(body.global_position)
-			active_enemy.queue_free()
+			active_enemy.poof_me()
 			active_enemy = null
 	else:
-		body.queue_free()
+		body.poof_me()
 	
 	if life_points <= 0:
 		game_over()
@@ -229,15 +236,16 @@ func reset_properties() -> void:
 	SignalManager.current_score.emit(score)
 	current_letter_index = -1
 	create_explosion(active_enemy.global_position)
-	active_enemy.queue_free()
+	active_enemy.poof_me()
 	active_enemy = null
 
-func continer_cleaning(container_type: Node2D) -> void:
+func continer_cleaning(container_type: Node2D, is_game_active: bool = true) -> void:
 	for enemy in container_type.get_children():
 		score += enemy.get_prompt().length() * 80
 		create_explosion(enemy.global_position)
-		enemy.queue_free()
-	SignalManager.current_score.emit(score)
+		enemy.poof_me()
+	if is_game_active:
+		SignalManager.current_score.emit(score)
 
 func start_timers() -> void:
 	spawn_timer.start()

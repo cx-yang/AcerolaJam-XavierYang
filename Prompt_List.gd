@@ -6,9 +6,15 @@ var happy_words = [
 	"quirk","recess","tubular","urbane","vivacious","wizard","xenodochial","yay","zealous",
 	"add up","brown dog","cow tools","doing","funny","good job","hat","instant","jump","kitty","love","music","nice crock","ocelot",
 	"party","quiz","red","tuba","umbrella","victory","wumbo","year","zoo","above you","birthday","cotton",
-	"drink water","eyes","flower","giraffe","honey","idea","jump","knock knock","learn","mail time",
-	"neptune","outside pool","power","quesadilla", "reptile", "turtle power", "until","visit friends",
-	"wack"
+	"drink water","eyes","flower","giraffe","honey","pizza","jump","knock knock","learn","mail time",
+	"neptune","outside pool","power","quesadilla", "reptile", "until", "visit friends",
+	"wack", "joke", "fairy organization", "midnight pasta","concrete", "present", "sandwiches","allow",
+	"mild","waterfall","new","yearn","joke","truth","key blade","waltz","rocket","catchphrase","passion","veil","mustard","picture","pocket",
+	"hey","rhythm","cultivate","count","user","drive","polite","inn","blink","wish","try mimicry","ocean","ooze","vanilla","pride eternity",
+	"future","breakfest","whoops","menagery","unlimted coupons","bedtime is fake","spare","big cheese","giant rat","with gratitude","scortched contract",
+	"anthm","treehouse","milkshake","echo","fluff","gravity","good news","baby steps","inhale exhale","be safe",
+	"for real","have fun","oh snap","think twice","matter","you first","yee haw","bug",
+	"roll","honest","direct","foster","chart","revamp","flicker","upgrade","pitch","discover","jewel","knit","view","queue","code",
 ]
 
 var gibberish = [
@@ -39,9 +45,9 @@ var events = [
 	["you", 8, "me", 8, "us",8],
 	["can you help me?", 9],
 	["yes", 10, "how?", 10, "no", 8],
-	["my arm", 11],
+	["look at my arm", 11],
 	["way too swollen", 12, "circulation is cut off", 12, "infected wound", 12],
-	["cut it off", 13],
+	["prepare to cut it off", 13],
 	["knife", 18, "scissors", 18, "no", 14],
 	["help me or i will die", 15],
 	["help", 12, "refuse", 16, "leave", 24],
