@@ -10,10 +10,12 @@ var high_score: int = 0
 
 func play_salamander_theme() -> void:
 	music.stream = salamnder_theme
+	music.volume_db = 0
 	music.play()
 
 func play_after() -> void:
 	music.stream = after
+	music.volume_db += 3
 	music.play()
 
 func play_game_over_theme() -> void:

@@ -1,4 +1,4 @@
-extends enemy_base
+extends enemy
 
 func _ready():
 	SignalManager.difficulty_increased.connect(handle_difficulty_increase)

@@ -16,7 +16,7 @@ hframes = 12
 position = Vector2(-1.5, 1)
 
 [node name="prompt" parent="." index="2"]
-custom_minimum_size = Vector2(100, 150)
+custom_minimum_size = Vector2(100, 300)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

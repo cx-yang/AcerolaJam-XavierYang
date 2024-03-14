@@ -1,0 +1,72 @@
+[gd_scene load_steps=4 format=3 uid="uid://2bpxf43l4256"]
+
+[ext_resource type="Texture2D" uid="uid://blctmhk1oy4hc" path="res://assets/score_frame.png" id="1_0gf67"]
+[ext_resource type="LabelSettings" uid="uid://bvqbhj7dsvw3d" path="res://ui/sogoe_32.tres" id="2_552q1"]
+[ext_resource type="PackedScene" uid="uid://bxo7hcyuhn1tq" path="res://ui/audio_slider.tscn" id="3_bbhb1"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 200
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
+custom_minimum_size = Vector2(50, 150)
+layout_mode = 2
+texture = ExtResource("1_0gf67")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 24
+patch_margin_top = 8
+patch_margin_right = 24
+patch_margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect"]
+layout_mode = 2
+offset_left = 326.0
+offset_top = 7.0
+offset_right = 1206.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Paused!"
+label_settings = ExtResource("2_552q1")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 75
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 75
+
+[node name="MasterSlider" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer" instance=ExtResource("3_bbhb1")]
+layout_mode = 2
+
+[node name="MusicSlider" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer" instance=ExtResource("3_bbhb1")]
+layout_mode = 2
+bus_name = "Music"
+
+[node name="SfxSlider" parent="MarginContainer/NinePatchRect/MarginContainer/VBoxContainer" instance=ExtResource("3_bbhb1")]
+layout_mode = 2
+bus_name = "Sfx"

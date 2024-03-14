@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://bvqbhj7dsvw3d"]
+
+[ext_resource type="FontFile" uid="uid://bqpk3joukfvne" path="res://assets/Segoe Print Bold.ttf" id="1_63lqb"]
+
+[resource]
+font = ExtResource("1_63lqb")
+font_size = 32
+font_color = Color(0, 0, 0, 1)

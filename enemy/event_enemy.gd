@@ -1,4 +1,4 @@
-extends enemy_base
+extends enemy
 
 @export var event_number: int = 0
 @export var option_number: int = 0

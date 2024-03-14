@@ -1,50 +1,34 @@
-[gd_scene load_steps=19 format=3 uid="uid://bns64xsow8lv7"]
+[gd_scene load_steps=18 format=3 uid="uid://bns64xsow8lv7"]
 
 [ext_resource type="Script" path="res://ui/menu_ui.gd" id="1_ibrtd"]
 [ext_resource type="Texture2D" uid="uid://blctmhk1oy4hc" path="res://assets/score_frame.png" id="2_bpstc"]
 [ext_resource type="Texture2D" uid="uid://b8251yfc44i1y" path="res://assets/salamander_title.png" id="2_rguxn"]
+[ext_resource type="LabelSettings" uid="uid://bwh0cigbvmhyc" path="res://ui/sogoe_16.tres" id="3_0604b"]
 [ext_resource type="Texture2D" uid="uid://cnx4tovlrc26c" path="res://assets/press_enter-Sheet.png" id="3_ftdi3"]
 [ext_resource type="Texture2D" uid="uid://di3wv5i5g3m0s" path="res://assets/salamander_gameover.png" id="3_vm7l2"]
+[ext_resource type="PackedScene" uid="uid://2bpxf43l4256" path="res://ui/pause_menu.tscn" id="6_edl48"]
+[ext_resource type="LabelSettings" uid="uid://bvqbhj7dsvw3d" path="res://ui/sogoe_32.tres" id="6_u7uuv"]
 
 [sub_resource type="SystemFont" id="SystemFont_ndra8"]
 font_names = PackedStringArray("Segoe Print")
 subpixel_positioning = 0
 
-[sub_resource type="LabelSettings" id="LabelSettings_35rdm"]
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="SystemFont" id="SystemFont_8g73v"]
-font_names = PackedStringArray("Segoe Print")
-subpixel_positioning = 0
-
-[sub_resource type="SystemFont" id="SystemFont_noeqt"]
-font_names = PackedStringArray("Segoe Print")
-subpixel_positioning = 0
-
-[sub_resource type="SystemFont" id="SystemFont_uspby"]
-font_names = PackedStringArray("Segoe Print")
-subpixel_positioning = 0
-
-[sub_resource type="SystemFont" id="SystemFont_nkhp8"]
-font_names = PackedStringArray("Segoe Print")
-subpixel_positioning = 0
+[sub_resource type="AtlasTexture" id="AtlasTexture_0oxqg"]
+atlas = ExtResource("3_ftdi3")
+region = Rect2(318, 0, 318, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4gi1m"]
 atlas = ExtResource("3_ftdi3")
 region = Rect2(0, 0, 318, 40)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0oxqg"]
-atlas = ExtResource("3_ftdi3")
-region = Rect2(318, 0, 318, 40)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_ho7q2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4gi1m")
+"texture": SubResource("AtlasTexture_0oxqg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0oxqg")
+"texture": SubResource("AtlasTexture_4gi1m")
 }],
 "loop": true,
 "name": &"default",
@@ -116,6 +100,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VBoxContainer/HBoxContainer2/AddScoreLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_0k4tp"]
 resource_name = "Tutorial_to_Game"
@@ -132,17 +128,34 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_nbjj4"]
+resource_name = "add_score"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/HBoxContainer2/AddScoreLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_seii6"]
 _data = {
 "Game_to_GameOver": SubResource("Animation_6fwae"),
 "RESET": SubResource("Animation_fdww2"),
-"Tutorial_to_Game": SubResource("Animation_0k4tp")
+"Tutorial_to_Game": SubResource("Animation_0k4tp"),
+"add_score": SubResource("Animation_nbjj4")
 }
 
 [node name="MenuUI" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_ibrtd")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="DifficultyRect" type="NinePatchRect" parent="."]
 modulate = Color(1, 1, 1, 0.917647)
 custom_minimum_size = Vector2(150, 0)
 offset_left = 40.0
@@ -157,7 +170,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+[node name="ScoreRect" type="NinePatchRect" parent="."]
 modulate = Color(1, 1, 1, 0.917647)
 custom_minimum_size = Vector2(150, 0)
 offset_left = 235.0
@@ -172,7 +185,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="NinePatchRect3" type="NinePatchRect" parent="."]
+[node name="LifeRect" type="NinePatchRect" parent="."]
 modulate = Color(1, 1, 1, 0.917647)
 custom_minimum_size = Vector2(150, 0)
 offset_left = 432.0
@@ -195,12 +208,22 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 300
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="AddScoreLabel" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+label_settings = ExtResource("3_0604b")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HB" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -216,23 +239,21 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("SystemFont_ndra8")
 theme_override_font_sizes/font_size = 16
 text = "Difficulty: 0"
-label_settings = SubResource("LabelSettings_35rdm")
+label_settings = ExtResource("3_0604b")
 vertical_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="VBoxContainer/HB"]
 custom_minimum_size = Vector2(145, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_8g73v")
 text = "Score: 0"
+label_settings = ExtResource("3_0604b")
 vertical_alignment = 1
 
 [node name="LifePointLabel" type="Label" parent="VBoxContainer/HB"]
 custom_minimum_size = Vector2(145, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_noeqt")
 text = "Life Points: 3"
+label_settings = ExtResource("3_0604b")
 vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
@@ -240,22 +261,14 @@ layout_mode = 2
 
 [node name="GOMC" type="MarginContainer" parent="."]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
 offset_right = 1280.0
 offset_bottom = 720.0
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="CenterContainer" type="CenterContainer" parent="GOMC"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="TextureRect" type="TextureRect" parent="GOMC/CenterContainer"]
+[node name="TextureRect" type="TextureRect" parent="GOMC"]
 layout_mode = 2
 texture = ExtResource("3_vm7l2")
+stretch_mode = 2
 
 [node name="VB" type="VBoxContainer" parent="GOMC"]
 layout_mode = 2
@@ -275,27 +288,21 @@ layout_mode = 2
 
 [node name="LoseLabel" type="Label" parent="GOMC/VB"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_uspby")
-theme_override_font_sizes/font_size = 32
 text = "Game Over"
+label_settings = ExtResource("6_u7uuv")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="FinalScoreLabel" type="Label" parent="GOMC/VB"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_nkhp8")
-theme_override_font_sizes/font_size = 32
 text = "New High Score: 0000"
+label_settings = ExtResource("6_u7uuv")
 horizontal_alignment = 1
 
 [node name="RestartLabel" type="Label" parent="GOMC/VB"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_nkhp8")
-theme_override_font_sizes/font_size = 32
 text = "Press Enter to restart"
+label_settings = ExtResource("6_u7uuv")
 horizontal_alignment = 1
 
 [node name="TutorialMC" type="MarginContainer" parent="."]
@@ -327,47 +334,43 @@ offset_right = 40.0
 offset_bottom = 40.0001
 
 [node name="ChefLabel" type="Label" parent="Names"]
+layout_mode = 0
 offset_left = 708.0
 offset_top = 25.0
 offset_right = 1080.0
 offset_bottom = 84.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_nkhp8")
-theme_override_font_sizes/font_size = 32
 text = "Chef "
+label_settings = ExtResource("6_u7uuv")
 horizontal_alignment = 1
 
 [node name="SockLabel" type="Label" parent="Names"]
+layout_mode = 0
 offset_left = 198.0
 offset_top = 639.0
 offset_right = 570.0
 offset_bottom = 698.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_nkhp8")
-theme_override_font_sizes/font_size = 32
 text = "Sock"
+label_settings = ExtResource("6_u7uuv")
 horizontal_alignment = 1
 
 [node name="WooshLabel" type="Label" parent="Names"]
+layout_mode = 0
 offset_left = 964.0
 offset_top = 496.0
 offset_right = 1336.0
 offset_bottom = 555.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_nkhp8")
-theme_override_font_sizes/font_size = 32
 text = "Woosh"
+label_settings = ExtResource("6_u7uuv")
 horizontal_alignment = 1
 
 [node name="MirrorLabel" type="Label" parent="Names"]
+layout_mode = 0
 offset_left = -92.0
 offset_top = 104.0
 offset_right = 280.0
 offset_bottom = 163.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("SystemFont_nkhp8")
-theme_override_font_sizes/font_size = 32
 text = "Mirror"
+label_settings = ExtResource("6_u7uuv")
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -377,5 +380,9 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_edl48")]
+process_mode = 2
+visible = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

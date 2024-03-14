@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://singletons/music_controller.gd" id="1_p4l48"]
 
 [node name="MusicController" type="Node"]
+process_mode = 3
 script = ExtResource("1_p4l48")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+bus = &"Music"

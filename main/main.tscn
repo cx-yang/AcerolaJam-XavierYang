@@ -1,10 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dt7nflcejhhkc"]
+[gd_scene load_steps=7 format=3 uid="uid://dt7nflcejhhkc"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_h8aja"]
 [ext_resource type="PackedScene" uid="uid://cpqk5m62jc80x" path="res://enemy/enemy_container.tscn" id="2_0h28o"]
-[ext_resource type="PackedScene" uid="uid://dhhtv4wriq4ri" path="res://events/event_spawner.tscn" id="3_w20yd"]
 [ext_resource type="PackedScene" uid="uid://bns64xsow8lv7" path="res://ui/menu_ui.tscn" id="4_6wlta"]
-[ext_resource type="AudioStream" uid="uid://cslm462dn7t5h" path="res://assets/sfx/CorrectSound5.mp3" id="6_egh1l"]
 [ext_resource type="PackedScene" uid="uid://b7v3s1er0ft2c" path="res://scrolling_bg/scrolling_bg.tscn" id="6_s3rym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhyef"]
@@ -13,97 +11,23 @@ size = Vector2(1184, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpeto"]
 size = Vector2(1182.5, 20)
 
-[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_gi2x6"]
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_h8aja")
 
 [node name="SpawnContainer" type="Node2D" parent="."]
 
-[node name="Marker2D" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(93, -74)
-
-[node name="Marker2D2" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(136, -102)
-
-[node name="Marker2D3" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(167, -76)
-
-[node name="Marker2D4" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(209, -106)
-
-[node name="Marker2D5" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(244, -78)
-
-[node name="Marker2D6" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(291, -107)
-
-[node name="Marker2D7" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(320, -81)
-
-[node name="Marker2D8" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(369, -107)
-
-[node name="Marker2D9" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(402, -78)
-
-[node name="Marker2D10" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(450, -111)
-
-[node name="Marker2D11" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(479, -83)
-
-[node name="Marker2D12" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(541, -112)
-
-[node name="Marker2D13" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(594, -82)
-
-[node name="Marker2D14" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(657, -112)
-
-[node name="Marker2D15" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(706, -82)
-
-[node name="Marker2D16" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(761, -117)
-
-[node name="Marker2D17" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(761, -117)
-
-[node name="Marker2D18" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(800, -82)
-
-[node name="Marker2D19" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(859, -119)
-
-[node name="Marker2D20" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(912, -88)
-
-[node name="Marker2D21" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(969, -121)
-
-[node name="Marker2D22" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(1021, -87)
-
-[node name="Marker2D23" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(1089, -124)
-
-[node name="Marker2D24" type="Marker2D" parent="SpawnContainer"]
-position = Vector2(1138, -94)
-
-[node name="EventSpawner" parent="." instance=ExtResource("3_w20yd")]
+[node name="EventSpawner" parent="." instance=ExtResource("2_0h28o")]
 
 [node name="EnemyContainer" parent="." instance=ExtResource("2_0h28o")]
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 5.5
+wait_time = 4.5
 
 [node name="DifficultyTimer" type="Timer" parent="."]
 wait_time = 22.0
 
 [node name="SalamanderTimer" type="Timer" parent="."]
-wait_time = 18.0
+wait_time = 21.0
 
 [node name="MenuUI" parent="." instance=ExtResource("4_6wlta")]
 
@@ -122,13 +46,11 @@ position = Vector2(643, -170)
 shape = SubResource("RectangleShape2D_wpeto")
 
 [node name="ScrollingBG" parent="." instance=ExtResource("6_s3rym")]
+process_mode = 1
 
-[node name="TypingSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_egh1l")
+[node name="sfx" type="AudioStreamPlayer" parent="."]
 pitch_scale = 0.85
-
-[node name="EventSound" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamMP3_gi2x6")
+bus = &"Sfx"
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timer_timeout"]

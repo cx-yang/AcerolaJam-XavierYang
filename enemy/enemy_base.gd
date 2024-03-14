@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-class_name enemy_base
+class_name enemy
 
 @export var blue = Color("#4682b4")
 @export var green = Color("#639765")
